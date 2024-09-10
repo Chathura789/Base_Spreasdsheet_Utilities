@@ -1,0 +1,42 @@
+---
+title: "Combine Excel Files"
+output: html_document
+---
+
+```{r}
+library(readxl)
+library(dplyr)
+
+combine_excel_files <- function(folder_path) {
+  # Initialize an empty list to hold the dataframes
+  df_list <- list()
+  
+  # Get the list of files in the folder
+  files <- list.files(folder_path, pattern = "\\.xlsx$", full.names = TRUE)
+  
+  # Iterate over each file
+  for (file_path in files) {
+    # Get the sheet names
+    sheet_names <- excel_sheets(file_path)
+    
+    # Iterate over each sheet
+    for (sheet_name in sheet_names) {
+      # Read the sheet into a dataframe
+      df <- read_excel(file_path, sheet = sheet_name)
+      # Add columns to identify the source sheet and tab
+      df <- df %>% mutate(source_tab = sheet_name, source_sheet = basename(file_path))
+      # Append the dataframe to the list
+      df_list[[paste(basename(file_path), sheet_name, sep = "_")]] <- df
+    }
+  }
+  
+  # Bind all dataframes into a single dataframe
+  combined_df <- bind_rows(df_list)
+  
+  return(combined_df)
+}
+
+# Example usage
+folder_path <- 'your_folder_path'
+combined_df <- combine_excel_files(folder_path)
+print(combined_df)

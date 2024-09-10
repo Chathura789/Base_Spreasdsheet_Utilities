@@ -1,0 +1,83 @@
+## Extended Description
+
+### Overview
+
+This project provides utility functions to streamline the process of combining data from multiple Excel files. It is particularly useful for data analysts and scientists who frequently work with large datasets spread across multiple Excel sheets and files. The provided functions in both Python and R allow users to merge all tabs from all spreadsheets in a specified folder into a single DataFrame, with clear identifiers for the source of each row.
+
+### Features
+
+- **Multi-file Support**: Combines data from all Excel files in a given folder.
+- **Multi-sheet Support**: Merges data from all sheets within each Excel file.
+- **Source Identification**: Adds two columns (`source_tab` and `source_sheet`) to identify the origin of each row.
+- **Ease of Use**: Simple function calls with minimal setup required.
+
+### Requirements
+
+#### Python
+
+- `pandas`
+- `os`
+
+#### R
+
+- `readxl`
+- `dplyr`
+
+### Installation
+
+#### Python
+
+1. Install `pandas` if you haven't already:
+    ```bash
+    pip install pandas
+    ```
+
+2. Download the `combine_excel_files.py` script and place it in your project directory.
+
+#### R
+
+1. Install `readxl` and `dplyr` if you haven't already:
+    ```r
+    install.packages("readxl")
+    install.packages("dplyr")
+    ```
+
+2. Download the `combine_excel_files.Rmd` script and place it in your project directory.
+
+### Usage
+
+#### Python
+
+1. Import the function from the script:
+    ```python
+    from combine_excel_files import combine_excel_files
+    ```
+
+2. Call the function with the path to your folder:
+    ```python
+    folder_path = 'your_folder_path'
+    combined_df = combine_excel_files(folder_path)
+    print(combined_df)
+    ```
+
+#### R
+
+1. Source the R Markdown file:
+    ```r
+    source("combine_excel_files.Rmd")
+    ```
+
+2. Call the function with the path to your folder:
+    ```r
+    folder_path <- 'your_folder_path'
+    combined_df <- combine_excel_files(folder_path)
+    print(combined_df)
+    ```
+
+### Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request or open an Issue if you have any suggestions or improvements.
+
+### License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
